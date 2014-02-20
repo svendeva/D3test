@@ -1,13 +1,28 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Page Title</title>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script type="text/javascript" src="d3.v3.js"></script>
     </head>
     <body>
-        <h1>Page Title</h1>
-        <p>This is a really interesting paragraph.</p>
-        <svg width="500" height="500">
-            <circle cx="200" cy="200" r="40"
-            fill="red" stroke="yellow" stroke-width="5"/>
-        </svg>
+        <script type="text/javascript">
+            var dataset = [ 5, 10, 15, 20, 25 ];
+
+            d3.select("body").selectAll("p")
+            .data(dataset)
+            .enter()
+            .append("p")
+            .style("color", function(d) {
+                if (d > 15) {   //Threshold of 15
+                    return "red";
+                } else {
+                    return "black";
+                }
+            })
+            .text(function(d) { return d; });
+            
+        </script>
+        
     </body>
 </html>
