@@ -7,22 +7,57 @@
     </head>
     <body>
         <script type="text/javascript">
-            var dataset = [ 5, 10, 15, 20, 25 ];
+            var dataset = [ 5, 20, 15, 3, 12, 23, 5, 17, 15, 9, 21, 11, 3, 13 ];
+            
+            var w = 500;
+            var h = 100;
+            var barPadding = 1;
 
-            d3.select("body").selectAll("p")
+           /* d3.select("body").selectAll("p")
             .data(dataset)
             .enter()
-            .append("p")
-            .style("color", function(d) {
-                if (d > 15) {   //Threshold of 15
-                    return "red";
-                } else {
-                    return "black";
-                }
-            })
-            .text(function(d) { return d; });
+            .append("div")
+            .attr("class", "bar")
+           .style("height", function(d) {
+                var barHeight = d * 4;  //Scale up by factor of 5
+                return barHeight + "px";
+            });*/
             
+            //Create SVG element
+            var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+        
+        svg.selectAll("rect")
+           .data(dataset)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+    return i * 21;  //Bar width of 20 plus 1 for padding
+})
+            .attr("x", function(d, i) {
+    return i * (w / dataset.length);
+})
+           .attr("y", 0)
+           
+           /*.attr("width", 20)*/
+           .attr("width", w / dataset.length - barPadding)
+           .attr("height", function(d) {
+    return d * 4;  // <-- Times four!
+});
+
+
         </script>
         
+        <style>
+            .bar {
+                display: inline-block;
+                width: 20px;
+                height: 75px;   /* We'll override this later */
+                background-color: teal;
+                margin-right: 2px;
+            }
+        </style>
     </body>
 </html>
