@@ -10,7 +10,7 @@
             var dataset = [ 5, 20, 15, 3, 12, 23, 5, 17, 15, 9, 21, 11, 3, 13 ];
             
             var w = 500;
-            var h = 100;
+            var h = 200;
             var barPadding = 1;
 
            /* d3.select("body").selectAll("p")
@@ -39,12 +39,18 @@
             .attr("x", function(d, i) {
     return i * (w / dataset.length);
 })
-           .attr("y", 0)
+           .attr("y", function(d) {
+    return h - d;  //Height minus data value
+})
            
            /*.attr("width", 20)*/
            .attr("width", w / dataset.length - barPadding)
            .attr("height", function(d) {
-    return d * 4;  // <-- Times four!
+                return(d * 4);  //Just the data value
+            })
+            .attr("fill", "teal")
+            .attr("fill", function(d) {
+    return "rgb(0, 0, " + (d * 10) + ")";
 });
 
 
